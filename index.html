@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Anupam Arohi</title>
+
+<!-- GitHub Pages cannot issue a server-side 301, so this is the closest thing:
+     an instant meta refresh, which search engines treat much like a redirect,
+     with the canonical link telling them where the real page lives. -->
+<meta http-equiv="refresh" content="0; url=https://anupam-arohi.github.io/about/">
+<link rel="canonical" href="https://anupam-arohi.github.io/about/">
+<meta name="robots" content="noindex, follow">
+<meta name="theme-color" content="#080d14">
+
+<style>
+  html{background:#080d14;color:#dfe7f0}
+  body{
+    margin:0;min-height:100vh;
+    display:flex;align-items:center;justify-content:center;
+    font:400 17px/1.72 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    text-align:center;padding:24px;
+  }
+  a{color:#2dd4bf;text-decoration:none;border-bottom:1px solid rgba(45,212,191,.3)}
+  a:hover{color:#4ade80;border-bottom-color:#4ade80}
+  :focus-visible{outline:2px solid #4ade80;outline-offset:3px;border-radius:4px}
+</style>
+</head>
+<body>
+
+<!-- Only ever seen if both the refresh and the script fail. It still has to
+     work, so it is a real sentence with a real link, not a spinner. -->
+<p>Taking you to <a href="https://anupam-arohi.github.io/about/">anupam-arohi.github.io/about</a>.</p>
+
+<script>
+/* replace() rather than assign(), so the back button returns to wherever the
+   visitor came from instead of bouncing them through here again. */
+location.replace("https://anupam-arohi.github.io/about/");
+</script>
+</body>
+</html>
