@@ -1,0 +1,149 @@
+/* ============================================================================
+   site.css  ·  the shared shell for anupam-arohi.github.io
+   ----------------------------------------------------------------------------
+   SOURCE OF TRUTH: anupam-arohi.github.io/_shared/site.css
+   DO NOT EDIT THE COPIES. Edit the source, then run:
+
+       python3 _shared/sync.py
+
+   which copies this file into every site repo and re-stamps the nav.
+
+   Scope: design tokens, base typography, skip link, hero, site nav, footer.
+   Anything page-specific belongs in that site's own stylesheet, which loads
+   AFTER this one and may override freely.
+   ========================================================================== */
+
+:root{
+  --bg:#080d14;
+  --bg-soft:#0e1622;
+  --panel:#121c2a;
+  --border:#1e2d40;
+  --text:#dfe7f0;
+  --muted:#8fa3b8;
+  --green:#4ade80;
+  --teal:#2dd4bf;
+  --violet:#a78bfa;
+  --pink:#f472b6;
+  --amber:#fbbf24;
+  /* Default reading width. Each site overrides this in its own stylesheet:
+     prose pages use 820-840px, the gallery widens to 1140px. */
+  --maxw:840px;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font:400 17px/1.72 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:var(--teal);text-decoration:none;border-bottom:1px solid rgba(45,212,191,.3)}
+a:hover{color:var(--green);border-bottom-color:var(--green)}
+
+/* Visible focus everywhere. Never remove this without replacing it. */
+:focus-visible{
+  outline:2px solid var(--green);
+  outline-offset:3px;
+  border-radius:4px;
+}
+
+.skip{
+  position:absolute;left:-9999px;top:0;
+  background:var(--panel);color:var(--text);
+  padding:10px 16px;border:1px solid var(--border);border-radius:0 0 8px 0;z-index:200;
+}
+.skip:focus{left:0}
+
+/* ---------- hero ---------- */
+.hero{
+  position:relative;
+  padding:76px 24px 44px;
+  text-align:center;
+  overflow:hidden;
+  border-bottom:1px solid var(--border);
+}
+.hero::before{
+  content:"";
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 70% 55% at 25% 0%, rgba(74,222,128,.20), transparent 60%),
+    radial-gradient(ellipse 60% 50% at 75% 10%, rgba(167,139,250,.18), transparent 62%),
+    radial-gradient(ellipse 90% 40% at 50% 100%, rgba(45,212,191,.10), transparent 70%);
+  pointer-events:none;
+}
+.hero > *{position:relative}
+.kicker{
+  font-size:12px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--green);margin:0 0 18px;font-weight:600;
+}
+h1{
+  margin:0 0 18px;
+  font-size:clamp(32px,6.2vw,54px);
+  line-height:1.1;font-weight:700;letter-spacing:-.02em;
+  background:linear-gradient(100deg,#e8f5ee 0%,#7dd3a8 45%,#a78bfa 100%);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.byline{color:var(--muted);font-size:15px;margin:0}
+.byline span{color:var(--text)}
+
+/* h1 is a gradient clipped to the text, which would swallow a colour emoji.
+   This span opts back out so the glyph paints normally. */
+.emoji{
+  -webkit-text-fill-color:initial;
+  background:none;
+  font-size:.78em;
+  vertical-align:.06em;
+}
+
+/* ---------- site nav ----------
+   Identical on every page of every site. Generated between the
+   <!-- site-nav:start --> markers by _shared/sync.py. Do not hand-edit. */
+.nav{
+  display:flex;gap:22px;justify-content:center;flex-wrap:wrap;
+  margin:26px 0 0;padding:0;list-style:none;
+  font-size:13px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;
+}
+.nav a{color:var(--muted);border:0}
+.nav a:hover,.nav a[aria-current="page"]{color:var(--green)}
+
+/* ---------- section nav ----------
+   Second row, for navigation WITHIN one site (photos: All / Series).
+   Deliberately lighter than .nav so the two levels never read as one bar. */
+.subnav{
+  display:flex;gap:18px;justify-content:center;flex-wrap:wrap;
+  margin:14px 0 0;padding:0;list-style:none;
+  font-size:13px;font-weight:500;letter-spacing:.02em;
+}
+.subnav a{
+  color:var(--muted);border:0;
+  padding:3px 12px;border-radius:100px;
+  background:rgba(255,255,255,.04);
+}
+.subnav a:hover{color:var(--text);background:rgba(255,255,255,.09)}
+.subnav a[aria-current="page"]{
+  color:#06210f;background:var(--green);font-weight:650;
+}
+
+/* ---------- layout ----------
+   h2 is deliberately NOT here: the prose sites want generous space above a
+   heading, the gallery and the guide want it tight. Each site sets its own. */
+main{max-width:var(--maxw);margin:0 auto;padding:0 24px 96px}
+p{margin:0 0 16px}
+
+/* ---------- footer ---------- */
+footer{
+  border-top:1px solid var(--border);
+  padding:36px 24px 56px;text-align:center;
+  color:var(--muted);font-size:14px;
+}
+footer p{margin:0 0 10px}
+.top{display:inline-block;margin-top:8px}
+
+/* ---------- motion ---------- */
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition-duration:.001ms !important;animation-duration:.001ms !important}
+}
