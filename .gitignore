@@ -1,0 +1,13 @@
+# macOS puts one of these in every folder you have ever opened in Finder.
+# commit.sh uses `git add -A`, so without this they ride along into commits.
+.DS_Store
+._*
+
+# Editors
+*.swp
+.vscode/
+.idea/
+
+# Python, from _shared/sync.py
+__pycache__/
+*.pyc
