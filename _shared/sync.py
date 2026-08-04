@@ -18,6 +18,13 @@ WHAT IT DOES
      The current="..." key is the ONE thing each page decides for itself. It
      controls which item gets aria-current="page". Everything else is generated.
 
+     An optional class="..." attribute picks the CSS class on the <ul>, so the
+     same nav can appear twice on a page in two different weights:
+
+         <!-- site-nav:start current="about" class="footer-nav" -->
+
+     It defaults to "nav", which is the header bar.
+
   3. Rewrites section nav (photos only) between site-subnav markers.
 
 USAGE
@@ -107,10 +114,15 @@ def stamp(html, path, problems):
     """Replace every nav and subnav block. Returns the new HTML."""
 
     def nav_sub(m):
-        current = attrs_of(m.group("attrs")).get("current", "")
+        a = attrs_of(m.group("attrs"))
+        current = a.get("current", "")
         if current and current not in {k for k, _, _ in NAV}:
             problems.append(f'{path}: unknown nav key "{current}"')
-        body = render(NAV, current, "nav")
+        # class="" lets a page render the same nav in a lighter footer weight.
+        css_class = a.get("class", "nav")
+        if css_class not in ("nav", "footer-nav"):
+            problems.append(f'{path}: unknown nav class "{css_class}"')
+        body = render(NAV, current, css_class)
         return f'{m.group("open")}\n{body}\n  {m.group("close")}'
 
     def subnav_sub(m):
